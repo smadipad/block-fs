@@ -1,0 +1,17 @@
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+/*  Primary Theme Color #673ab7 */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+
+.main-container {
+  margin: 1rem 1.5rem 0 1.5rem;
+  padding: 1.6rem 3.2rem;
+}

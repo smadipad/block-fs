@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="text-center">
+                    <h1>Login</h1>
+                    <h6>Please enter email and password</h6>
+                </div>
+                <form>
+                    <form [formGroup]="loginForm" (ngSubmit)="login()">
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Email address</label>
+                          <input formControlName="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                          <label for="exampleInputPassword1" class="form-label">Password</label>
+                          <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1">
+                          <div class="col-auto">
+                            <span id="passwordHelpInline" class="form-text">
+                              Must be 8-20 characters long.
+                            </span>
+                          </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Login</button>
+                      </form>
+                </form>
+                <a style="color: #ffff; margin-top: 10px;" routerLink="/signup">Create a new account</a>
+                
+                <a style="color: #ffff; margin-top: 10px;" routerLink="/forgot-password">Forgot Password?</a>
+                
+            </div>
+        </div>
+    </div>
+</div>
