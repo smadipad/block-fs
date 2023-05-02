@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="filesEnlist.component.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div id="header">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
+      </div>
+
+          <div class="files-list">
+            <div class="upload-container">
+              <span>Click on the button to upload file: </span>
+              <button class="upload-button" (click)="openUploadModal()">Upload File</button>
+            </div>
+            <br>
+            <br>
+            <table>
+              <tbody>
+                <tr *ngFor="let file of files">
+                  <td class="file-name">{{ file.name }}</td>
+                  <td><button class="download-button" (click)="downloadFile(file.url)">Download</button></td>
+                  <td><button class="share-button" (click)="openShareModal(file)">Share</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+    </div>
+    <!-- Share Modal -->
+    <div *ngIf="shareModalVisible" class="share-modal">
+      <div class="share-modal-content">
+        <h3>Share "{{ selectedFile?.name }}"</h3>
+        <div class="share-emails">
+          <input type="email" [(ngModel)]="newEmail" placeholder="Enter email address">
+          <button (click)="addEmail(newEmail)">Add</button>
+        </div>
+        <div class="email-list" *ngFor="let email of sharedWithEmails">
+          <span>{{ email }}</span>
+          <select [(ngModel)]="permissions[email]">
+            <option *ngFor="let option of permissionOptions">{{option}}</option>
+          </select>
+          <button (click)="removeEmail(email)">Remove</button>
+        </div>
+        <div class="link-permissions">
+          <label>Permissions:</label>
+          <select [(ngModel)]="linkPermissions">
+            <option *ngFor="let option of permissionOptions">{{option}}</option>
+          </select>
+        </div>
+        <button class="close-modal" (click)="closeShareModal()">Close</button>
+      </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div *ngIf="uploadModalVisible" class="upload-modal">
+      <div class="upload-modal-content">
+        <h3>Upload a File</h3>
+        <div class="file-input-container">
+          <label for="file-input" class="file-input-label">Choose File</label>
+          <input type="file" id="file-input" (change)="handleFileInput($event)">
+        </div>
+        <div class="selected-file" *ngIf="selectedUploadFile">
+          Selected File: {{selectedUploadFile.name}}
+        </div>
+        <div class="upload-buttons">
+          <button class="cancel-button" (click)="closeUploadModal()">Cancel</button>
+          <button class="confirm-upload-button" (click)="uploadFile()">Upload</button>
+        </div>
+      </div>
+    </div>
+  
+  </body>
+</html>
