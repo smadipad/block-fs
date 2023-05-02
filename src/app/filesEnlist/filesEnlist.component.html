@@ -14,23 +14,37 @@
         </div>
       </div>
 
-          <div class="files-list">
-            <div class="upload-container">
-              <span>Click on the button to upload file: </span>
-              <button class="upload-button" (click)="openUploadModal()">Upload File</button>
-            </div>
-            <br>
-            <br>
-            <table>
-              <tbody>
-                <tr *ngFor="let file of files">
-                  <td class="file-name">{{ file.name }}</td>
-                  <td><button class="download-button" (click)="downloadFile(file.url)">Download</button></td>
-                  <td><button class="share-button" (click)="openShareModal(file)">Share</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+
+      <div class="files-list">
+        <div class="upload-container">
+          <span>Click on the button to upload file: </span>
+          <button class="upload-button" (click)="openUploadModal()">Upload File</button>
+        </div>
+        <br>
+        <br>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>File name</th>
+              <th>File Description</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let file of files; let i = index">
+              <td>{{ i + 1 }}</td>
+              <td class="file-name">{{ file.name }}</td>
+              <td>
+                <div class="file-description">{{ file.description }}</div>
+              </td>
+              <td><button class="download-button" (click)="downloadFile(file.url)">Download</button></td>
+              <td><button class="share-button" (click)="openShareModal(file)">Share</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <!-- Share Modal -->
     <div *ngIf="shareModalVisible" class="share-modal">
@@ -58,6 +72,7 @@
     </div>
 
     <!-- Upload Modal -->
+ 
     <div *ngIf="uploadModalVisible" class="upload-modal">
       <div class="upload-modal-content">
         <h3>Upload a File</h3>
@@ -68,12 +83,15 @@
         <div class="selected-file" *ngIf="selectedUploadFile">
           Selected File: {{selectedUploadFile.name}}
         </div>
+        <div class="file-description">
+          <label for="file-description">File Description:</label>
+          <input type="text" id="file-description" [(ngModel)]="fileDescription" placeholder="Enter file description">
+        </div>
         <div class="upload-buttons">
           <button class="cancel-button" (click)="closeUploadModal()">Cancel</button>
           <button class="confirm-upload-button" (click)="uploadFile()">Upload</button>
         </div>
       </div>
     </div>
-  
   </body>
 </html>

@@ -4,6 +4,7 @@ interface MyFile {
   name: string;
   url: string;
   byteStream: Uint8Array;
+  description: string;
 }
 
 @Component({
@@ -12,10 +13,28 @@ interface MyFile {
   styleUrls: ['./filesEnlist.component.css']
 })
 export class FilesEnlistComponent {
+
+  fileDescription = '';
+
   files: MyFile[] = [
-    { name: 'file1.pdf', url: 'https://example.com/file1.pdf', byteStream: new Uint8Array() },
-    { name: 'file2.docx', url: 'https://example.com/file2.docx', byteStream: new Uint8Array() },
-    { name: 'file3.jpg', url: 'https://example.com/file3.jpg', byteStream: new Uint8Array() },
+    {
+      name: 'file1.pdf',
+      url: 'https://example.com/file1.pdf',
+      byteStream: new Uint8Array(),
+      description: 'Sample description for file1.pdf',
+    },
+    {
+      name: 'file2.docx',
+      url: 'https://example.com/file2.docx',
+      byteStream: new Uint8Array(),
+      description: 'Sample description for file2.docx',
+    },
+    {
+      name: 'file3.jpg',
+      url: 'https://example.com/file3.jpg',
+      byteStream: new Uint8Array(),
+      description: 'Sample description for file3.jpg',
+    },
   ];
 
   shareModalVisible = false;
@@ -85,7 +104,7 @@ export class FilesEnlistComponent {
     }
   }
 
-  uploadFile() {
+ uploadFile() {
     if (this.selectedUploadFile) {
       const reader = new FileReader();
       reader.onload = (event: ProgressEvent<FileReader>) => {
@@ -93,20 +112,22 @@ export class FilesEnlistComponent {
           // Convert the file to a 32-bit byte stream
           const arrayBuffer = event.target.result as ArrayBuffer;
           const byteArray = new Uint8Array(arrayBuffer);
-  
+
           // Store the byte stream in a new property
           const newFile: MyFile = {
             name: this.selectedUploadFile!.name, // Add the '!' to assert that the value is not null
             url: 'https://example.com/' + encodeURIComponent(this.selectedUploadFile!.name), // Add the '!' here as well
             byteStream: byteArray,
+            description: this.fileDescription, // Add the file description property
           };
 
           console.log('New file byte stream:', newFile.byteStream);
-  
+
           this.files.push(newFile);
-  
-          // Close the upload modal and clear the selected file
+
+          // Close the upload modal and clear the selected file and file description
           this.closeUploadModal();
+          this.fileDescription = '';
         }
       };
       reader.readAsArrayBuffer(this.selectedUploadFile);
