@@ -18,6 +18,7 @@ export class LoginComponent {
       password:['']
     })
   }
+  
   login(){
     console.log(this.loginForm.value.email)
     let uname= this.loginForm.value.email

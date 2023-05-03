@@ -26,6 +26,7 @@ export class SignupComponent implements OnInit {
       }
     )
   }
+  
   signup(){
     console.log(this.signupForm.value);
     this.http.post<any>("http://localhost:8085/user/add",this.signupForm.value)

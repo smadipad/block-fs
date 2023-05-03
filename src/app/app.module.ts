@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { FilesEnlistComponent } from './filesEnlist/filesEnlist.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ThemePalette } from '@angular/material/core';
@@ -13,7 +14,8 @@ import { ThemePalette } from '@angular/material/core';
   declarations: [
     AppComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    FilesEnlistComponent
   ],
   imports: [
     BrowserModule,
